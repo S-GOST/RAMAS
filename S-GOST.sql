@@ -1,0 +1,391 @@
+-- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: sistema_gestion_ordenes_servicio_tecnico
+-- ------------------------------------------------------
+-- Server version	5.5.5-10.4.32-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `administradores`
+--
+
+DROP TABLE IF EXISTS `administradores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `administradores` (
+  `ID_ADMINISTRADOR` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  `Correo` varchar(100) NOT NULL,
+  `Cedula` decimal(20,0) NOT NULL,
+  `Telefono` decimal(10,0) DEFAULT NULL,
+  PRIMARY KEY (`ID_ADMINISTRADOR`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `administradores`
+--
+
+LOCK TABLES `administradores` WRITE;
+/*!40000 ALTER TABLE `administradores` DISABLE KEYS */;
+INSERT INTO `administradores` VALUES (1,'Alejandro','alejandroxxxx@gmail.com',47851,6547545),(2,'juan','Santiagoxxxx@gmail.com',89452,5478961);
+/*!40000 ALTER TABLE `administradores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `clientes`
+--
+
+DROP TABLE IF EXISTS `clientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clientes` (
+  `ID_CLIENTES` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_UBICACION` varchar(20) DEFAULT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Correo` varchar(100) NOT NULL,
+  `Telefono` varchar(20) NOT NULL,
+  `Cedula` varchar(45) NOT NULL,
+  PRIMARY KEY (`ID_CLIENTES`),
+  KEY `clientes_ibfk_1` (`ID_UBICACION`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clientes`
+--
+
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+INSERT INTO `clientes` VALUES (1,'Bogota','Teodoro','Teodoroxxxx@gmail.com','45253',''),(2,'Cazuca','Bock','Bockxxxx@gmail.com','57415',''),(3,'Madrid','Terry','Terryxxxx@gmail.com','89552','');
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `comprobante`
+--
+
+DROP TABLE IF EXISTS `comprobante`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `comprobante` (
+  `ID_COMPROBANTE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_DETALLES_ORDEN_SERVICIO` int(11) DEFAULT NULL,
+  `ID_CLIENTES` int(11) DEFAULT NULL,
+  `ID_ADMINISTRADOR` int(11) DEFAULT NULL,
+  `Monto` decimal(10,2) NOT NULL,
+  `Fecha` datetime NOT NULL,
+  `Estado_pago` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID_COMPROBANTE`),
+  KEY `comprobante_ibfk_1` (`ID_DETALLES_ORDEN_SERVICIO`),
+  KEY `comprobante_ibfk_2` (`ID_CLIENTES`),
+  KEY `comprobante_ibfk_3` (`ID_ADMINISTRADOR`),
+  CONSTRAINT `comprobante_ibfk_1` FOREIGN KEY (`ID_DETALLES_ORDEN_SERVICIO`) REFERENCES `detalles_orden_servicio` (`ID_DETALLES_ORDEN_SERVICIO`),
+  CONSTRAINT `comprobante_ibfk_2` FOREIGN KEY (`ID_CLIENTES`) REFERENCES `clientes` (`ID_CLIENTES`),
+  CONSTRAINT `comprobante_ibfk_3` FOREIGN KEY (`ID_ADMINISTRADOR`) REFERENCES `administradores` (`ID_ADMINISTRADOR`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `comprobante`
+--
+
+LOCK TABLES `comprobante` WRITE;
+/*!40000 ALTER TABLE `comprobante` DISABLE KEYS */;
+/*!40000 ALTER TABLE `comprobante` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `detalles_orden_servicio`
+--
+
+DROP TABLE IF EXISTS `detalles_orden_servicio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `detalles_orden_servicio` (
+  `ID_DETALLES_ORDEN_SERVICIO` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_ORDEN_SERVICIO` int(11) DEFAULT NULL,
+  `ID_SERVICIOS` int(11) DEFAULT NULL,
+  `ID_PRODUCTOS` int(11) DEFAULT NULL,
+  `Garantia` varchar(100) NOT NULL,
+  `Cantidad` int(11) NOT NULL,
+  `Estado` varchar(20) NOT NULL,
+  `Precio` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`ID_DETALLES_ORDEN_SERVICIO`),
+  KEY `detalles_orden_servicio_ibfk_1` (`ID_ORDEN_SERVICIO`),
+  KEY `detalles_orden_servicio_ibfk_2` (`ID_SERVICIOS`),
+  KEY `detalles_orden_servicio_ibfk_3` (`ID_PRODUCTOS`),
+  CONSTRAINT `detalles_orden_servicio_ibfk_1` FOREIGN KEY (`ID_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`),
+  CONSTRAINT `detalles_orden_servicio_ibfk_2` FOREIGN KEY (`ID_SERVICIOS`) REFERENCES `servicios` (`ID_SERVICIOS`),
+  CONSTRAINT `detalles_orden_servicio_ibfk_3` FOREIGN KEY (`ID_PRODUCTOS`) REFERENCES `productos` (`ID_PRODUCTOS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `detalles_orden_servicio`
+--
+
+LOCK TABLES `detalles_orden_servicio` WRITE;
+/*!40000 ALTER TABLE `detalles_orden_servicio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `detalles_orden_servicio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `historial`
+--
+
+DROP TABLE IF EXISTS `historial`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `historial` (
+  `ID_HISTORIAL` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_ORDEN_SERVICIO` int(11) DEFAULT NULL,
+  `ID_COMPROBANTE` int(11) DEFAULT NULL,
+  `Descripcion` varchar(200) DEFAULT NULL,
+  `Fecha_registro` datetime NOT NULL,
+  PRIMARY KEY (`ID_HISTORIAL`),
+  KEY `historial_ibfk_1` (`ID_ORDEN_SERVICIO`),
+  CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`ID_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `historial`
+--
+
+LOCK TABLES `historial` WRITE;
+/*!40000 ALTER TABLE `historial` DISABLE KEYS */;
+/*!40000 ALTER TABLE `historial` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `informe`
+--
+
+DROP TABLE IF EXISTS `informe`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `informe` (
+  `ID_INFORME` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_ORDEN_SERVICIO` int(11) DEFAULT NULL,
+  `ID_ADMINISTRADOR` int(11) DEFAULT NULL,
+  `ID_TECNICOS` int(11) DEFAULT NULL,
+  `Descripcion` varchar(200) NOT NULL,
+  `Fecha` datetime NOT NULL,
+  `Estado` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID_INFORME`),
+  KEY `informe_ibfk_1` (`ID_ORDEN_SERVICIO`),
+  KEY `informe_ibfk_2` (`ID_ADMINISTRADOR`),
+  KEY `informe_ibfk_3` (`ID_TECNICOS`),
+  CONSTRAINT `informe_ibfk_1` FOREIGN KEY (`ID_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`),
+  CONSTRAINT `informe_ibfk_2` FOREIGN KEY (`ID_ADMINISTRADOR`) REFERENCES `administradores` (`ID_ADMINISTRADOR`),
+  CONSTRAINT `informe_ibfk_3` FOREIGN KEY (`ID_TECNICOS`) REFERENCES `tecnicos` (`ID_TECNICOS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `informe`
+--
+
+LOCK TABLES `informe` WRITE;
+/*!40000 ALTER TABLE `informe` DISABLE KEYS */;
+/*!40000 ALTER TABLE `informe` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `motos`
+--
+
+DROP TABLE IF EXISTS `motos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `motos` (
+  `ID_MOTOS` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_CLIENTES` int(11) DEFAULT NULL,
+  `Placa` varchar(20) NOT NULL,
+  `Modelo` varchar(100) NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `Recorrido` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID_MOTOS`),
+  KEY `motos_ibfk_1` (`ID_CLIENTES`),
+  CONSTRAINT `motos_ibfk_1` FOREIGN KEY (`ID_CLIENTES`) REFERENCES `clientes` (`ID_CLIENTES`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `motos`
+--
+
+LOCK TABLES `motos` WRITE;
+/*!40000 ALTER TABLE `motos` DISABLE KEYS */;
+INSERT INTO `motos` VALUES (2,1,'MIN587','250','kTM','360000KM'),(3,2,'KTM852','390','kTM','460000KM'),(4,3,'LMH123','200','kTM','560000KM');
+/*!40000 ALTER TABLE `motos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orden_servicio`
+--
+
+DROP TABLE IF EXISTS `orden_servicio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orden_servicio` (
+  `ID_ORDEN_SERVICIO` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_CLIENTES` int(11) DEFAULT NULL,
+  `ID_ADMINISTRADOR` int(11) DEFAULT NULL,
+  `ID_TECNICOS` int(11) DEFAULT NULL,
+  `ID_MOTOS` int(11) DEFAULT NULL,
+  `Fecha_inicio` datetime NOT NULL,
+  `Fecha_estimada` datetime NOT NULL,
+  `Fecha_fin` datetime NOT NULL,
+  `Estado` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID_ORDEN_SERVICIO`),
+  KEY `orden_servicio_ibfk_1` (`ID_CLIENTES`),
+  KEY `orden_servicio_ibfk_2` (`ID_ADMINISTRADOR`),
+  KEY `orden_servicio_ibfk_3` (`ID_TECNICOS`),
+  KEY `orden_servicio_ibfk_4` (`ID_MOTOS`),
+  CONSTRAINT `orden_servicio_ibfk_1` FOREIGN KEY (`ID_CLIENTES`) REFERENCES `clientes` (`ID_CLIENTES`),
+  CONSTRAINT `orden_servicio_ibfk_2` FOREIGN KEY (`ID_ADMINISTRADOR`) REFERENCES `administradores` (`ID_ADMINISTRADOR`),
+  CONSTRAINT `orden_servicio_ibfk_3` FOREIGN KEY (`ID_TECNICOS`) REFERENCES `tecnicos` (`ID_TECNICOS`),
+  CONSTRAINT `orden_servicio_ibfk_4` FOREIGN KEY (`ID_MOTOS`) REFERENCES `motos` (`ID_MOTOS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orden_servicio`
+--
+
+LOCK TABLES `orden_servicio` WRITE;
+/*!40000 ALTER TABLE `orden_servicio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `orden_servicio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productos`
+--
+
+DROP TABLE IF EXISTS `productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `productos` (
+  `ID_PRODUCTOS` int(11) NOT NULL AUTO_INCREMENT,
+  `Categoria` varchar(100) NOT NULL,
+  `Marca` varchar(100) NOT NULL,
+  `Nombre` varchar(100) NOT NULL,
+  `Garantia` varchar(100) NOT NULL,
+  `Precio` decimal(10,2) NOT NULL,
+  `Cantidad` int(11) NOT NULL,
+  `Estado` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`ID_PRODUCTOS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `productos`
+--
+
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `servicios`
+--
+
+DROP TABLE IF EXISTS `servicios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `servicios` (
+  `ID_SERVICIOS` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  `Categoria` varchar(100) NOT NULL,
+  `Garantia` varchar(100) NOT NULL,
+  `Estado` varchar(20) NOT NULL,
+  `Precio` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`ID_SERVICIOS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `servicios`
+--
+
+LOCK TABLES `servicios` WRITE;
+/*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tecnicos`
+--
+
+DROP TABLE IF EXISTS `tecnicos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tecnicos` (
+  `ID_TECNICOS` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  `Correo` varchar(100) NOT NULL,
+  `Cedula` varchar(100) NOT NULL,
+  `Telefono` decimal(10,0) NOT NULL,
+  PRIMARY KEY (`ID_TECNICOS`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tecnicos`
+--
+
+LOCK TABLES `tecnicos` WRITE;
+/*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
+INSERT INTO `tecnicos` VALUES (1,'Santiago','Santiagoxxx@gmail.com','258963',3002547896),(2,'Alejandro','Alejandroxxx@gmail.com','213654',1236547896),(3,'Camilo','Camiloxxx@gmail.com','525252',312548795);
+/*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ubicacion`
+--
+
+DROP TABLE IF EXISTS `ubicacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `ubicacion` (
+  `ID_UBICACION` varchar(20) NOT NULL,
+  `Departamento` varchar(100) NOT NULL,
+  `Ciudad` varchar(100) NOT NULL,
+  `Direccion` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID_UBICACION`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ubicacion`
+--
+
+LOCK TABLES `ubicacion` WRITE;
+/*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
+INSERT INTO `ubicacion` VALUES ('lugar','Cundinamarca','Bogota','Cra30');
+/*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2025-10-20 13:44:58
