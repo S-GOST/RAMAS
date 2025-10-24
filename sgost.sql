@@ -1,5 +1,3 @@
-create database sgost;
-use sgost;
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sgost
@@ -68,7 +66,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (1,'Bogota','Teodoro','Teodoroxxxx@gmail.com','45253'),(2,'Cazuca','Bock','Bockxxxx@gmail.com','57415'),(3,'Madrid','Terry','Terryxxxx@gmail.com','89552');
+INSERT INTO `clientes` VALUES (1,'1','Teodoro','Teodoroxxxx@gmail.com','45253'),(2,'2','Bock','Bockxxxx@gmail.com','57415'),(3,'3','Terry','Terryxxxx@gmail.com','89552');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -370,12 +368,12 @@ DROP TABLE IF EXISTS `ubicacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ubicacion` (
-  `ID_UBICACION` varchar(20) NOT NULL,
+  `ID_UBICACION` int(11) NOT NULL AUTO_INCREMENT,
   `Departamento` varchar(100) NOT NULL,
   `Ciudad` varchar(100) NOT NULL,
   `Direccion` varchar(100) NOT NULL,
   PRIMARY KEY (`ID_UBICACION`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -384,7 +382,7 @@ CREATE TABLE `ubicacion` (
 
 LOCK TABLES `ubicacion` WRITE;
 /*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
-INSERT INTO `ubicacion` VALUES ('lugar','Cundinamarca','Bogota','Cra30');
+INSERT INTO `ubicacion` VALUES (1,'Cundinamarca','Sopo','Cra 45'),(2,'Cundinamarca','Bogota','Cra30'),(3,'Cundinamarca','Briseño','Cra 80');
 /*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -397,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-22 13:40:04
+-- Dump completed on 2025-10-24 13:53:34
