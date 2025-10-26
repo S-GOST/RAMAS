@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
--- Host: localhost    Database: sgost
+-- Host: 127.0.0.1    Database: sgost
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.4.32-MariaDB
 
@@ -368,12 +368,12 @@ DROP TABLE IF EXISTS `ubicacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ubicacion` (
-  `ID_UBICACION` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_UBICACION` int(11) NOT NULL,
   `Departamento` varchar(100) NOT NULL,
   `Ciudad` varchar(100) NOT NULL,
   `Direccion` varchar(100) NOT NULL,
   PRIMARY KEY (`ID_UBICACION`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -382,7 +382,7 @@ CREATE TABLE `ubicacion` (
 
 LOCK TABLES `ubicacion` WRITE;
 /*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
-INSERT INTO `ubicacion` VALUES (1,'Cundinamarca','Sopo','Cra 45'),(2,'Cundinamarca','Bogota','Cra30'),(3,'Cundinamarca','Briseño','Cra 80');
+INSERT INTO `ubicacion` VALUES (1,'Cundinamarca','Briseno','80'),(2,'Cundinamarca','Guatoque','80'),(3,'Cundinamarca','El carmen','80');
 /*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -395,4 +395,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-10-24 13:53:34
+-- Dump completed on 2025-10-26 14:18:50
