@@ -1,8 +1,5 @@
-use sgost;
-
 
 /* Todas las ordenes a cargo */
-
 SELECT o.ID_ORDEN_SERVICIO, a.Nombre AS Administradores, t.Nombre AS Tecnicos, c.Nombre AS Clientes, o.Estado
 FROM orden_servicio o
 JOIN clientes c ON o.ID_CLIENTES = c.ID_CLIENTES
@@ -52,8 +49,8 @@ where precio = (select max(precio)from servicios);
 
 /* Cantidad de ordenes por estado */ 
 
-select Estado, count(*) as Total
-from orden_servicio
+select o.ID_ORDEN_SERVICIO, Estado
+from orden_servicio o
 group by Estado;
 
 /* Total de productos usados por cada orden */
@@ -88,8 +85,11 @@ select o.ID_ORDEN_SERVICIO, c.Nombre as clientes
 from orden_servicio o
 join clientes c on o.ID_CLIENTES = c.ID_CLIENTES;
 
-/*Motos por cada cliente*/
+/*Motos por cada cliente con marca y placa*/
 
-select m.ID_MOTOS, c.Nombre as clientes
-from motos m 
-join clientes c on m.ID_MOTOS = c.ID_MOTOS = 'Marca';
+select o.ID_MOTOS, m.Marca, m.Placa
+from clientes c 
+join orden_servicio o ON c.ID_CLIENTES = o.ID_CLIENTES
+join motos m ON o.ID_MOTOS = m.ID_MOTOS;
+
+/* 
