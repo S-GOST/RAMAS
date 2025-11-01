@@ -1,4 +1,4 @@
-
+use sgost;
 /* Todas las ordenes a cargo */
 SELECT o.ID_ORDEN_SERVICIO, a.Nombre AS Administradores, t.Nombre AS Tecnicos, c.Nombre AS Clientes, o.Estado
 FROM orden_servicio o
@@ -15,7 +15,8 @@ select * from ubicacion;
 select * from detalles_orden_servicio;
 select * from orden_servicio;
 select * from detalles_orden_servicio;
-
+select * from informe;
+select * from comprobante;
 /* Clientes con su ubicacion */
 
 select c.Nombre, u.Ciudad, u.Direccion
@@ -79,12 +80,19 @@ select c.ID_COMPROBANTE, i.ID_INFORME, c.Monto
 FROM comprobante c 
 JOIN informe i  ON i.ID_INFORME = c.ID_INFORME;
 
+/* Ver ordenes con su informe y comprobante */
+select o.ID_ORDEN_SERVICIO, c.Nombre as Cliente, i.Descripcion as Informe, co.Monto as Comprobante, o.Estado
+from orden_servicio o 
+join clientes c on o.ID_CLIENTES = c.ID_CLIENTES
+join detalles_orden_servicio d on o.ID_ORDEN_SERVICIO = d.ID_ORDEN_SERVICIO
+join informe i on i.ID_DETALLES_ORDEN_SERVICIO = d.ID_DETALLES_ORDEN_SERVICIO
+join comprobante co on co.ID_INFORME = d.ID_ORDEN_SERVICIO;
+
 /*Orden por cada cliente*/
 
 select o.ID_ORDEN_SERVICIO, c.Nombre as clientes 
 from orden_servicio o
 join clientes c on o.ID_CLIENTES = c.ID_CLIENTES;
-
 /*Motos por cada cliente con marca y placa*/
 
 select o.ID_MOTOS, m.Marca, m.Placa
@@ -92,4 +100,7 @@ from clientes c
 join orden_servicio o ON c.ID_CLIENTES = o.ID_CLIENTES
 join motos m ON o.ID_MOTOS = m.ID_MOTOS;
 
-/* 
+/* Cuantas ordenes se han entregado */
+select count(*) as OrdenesEntregadas
+from informe
+where Estado = 'Lista para entrega';
