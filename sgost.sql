@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: sgost
+-- Host: localhost    Database: sgost
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.4.32-MariaDB
 
@@ -36,9 +36,11 @@ CREATE TABLE `administradores` (
 -- Dumping data for table `administradores`
 --
 
+LOCK TABLES `administradores` WRITE;
 /*!40000 ALTER TABLE `administradores` DISABLE KEYS */;
 INSERT INTO `administradores` VALUES (1,'JuanP','Juanpxxx@gmail.com','5698745','322546987'),(2,'Alejo','Alejopxxx@gmail.com','5469871','325586787');
 /*!40000 ALTER TABLE `administradores` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `clientes`
@@ -64,9 +66,11 @@ CREATE TABLE `clientes` (
 -- Dumping data for table `clientes`
 --
 
+LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
 INSERT INTO `clientes` VALUES (2,1,'Teodoro','2669871','Teodoroxxx@gmail.com','310586787'),(3,2,'Bok','5463215','3215786\'Bokxxx@gmail.com','320586787'),(4,3,'Bok','5463215','Terryxxx@gmail.com','300586787');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `comprobante`
@@ -97,8 +101,10 @@ CREATE TABLE `comprobante` (
 -- Dumping data for table `comprobante`
 --
 
+LOCK TABLES `comprobante` WRITE;
 /*!40000 ALTER TABLE `comprobante` DISABLE KEYS */;
 /*!40000 ALTER TABLE `comprobante` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `detalles_orden_servicio`
@@ -113,7 +119,6 @@ CREATE TABLE `detalles_orden_servicio` (
   `ID_SERVICIOS` int(11) DEFAULT NULL,
   `ID_PRODUCTOS` int(11) DEFAULT NULL,
   `Garantia` varchar(100) NOT NULL,
-  `Cantidad` int(11) NOT NULL,
   `Estado` varchar(20) NOT NULL,
   `Precio` decimal(10,2) NOT NULL,
   PRIMARY KEY (`ID_DETALLES_ORDEN_SERVICIO`),
@@ -123,15 +128,18 @@ CREATE TABLE `detalles_orden_servicio` (
   CONSTRAINT `detalles_orden_servicio_ibfk_1` FOREIGN KEY (`ID_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`),
   CONSTRAINT `detalles_orden_servicio_ibfk_2` FOREIGN KEY (`ID_SERVICIOS`) REFERENCES `servicios` (`ID_SERVICIOS`),
   CONSTRAINT `detalles_orden_servicio_ibfk_3` FOREIGN KEY (`ID_PRODUCTOS`) REFERENCES `productos` (`ID_PRODUCTOS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `detalles_orden_servicio`
 --
 
+LOCK TABLES `detalles_orden_servicio` WRITE;
 /*!40000 ALTER TABLE `detalles_orden_servicio` DISABLE KEYS */;
+INSERT INTO `detalles_orden_servicio` VALUES (1,1,1,1,'30','En proceso',300000.00),(2,2,2,3,'10','En proceso',400000.00),(4,3,3,3,'15','Finalizada',500000.00);
 /*!40000 ALTER TABLE `detalles_orden_servicio` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `historial`
@@ -161,8 +169,10 @@ CREATE TABLE `historial` (
 -- Dumping data for table `historial`
 --
 
+LOCK TABLES `historial` WRITE;
 /*!40000 ALTER TABLE `historial` DISABLE KEYS */;
 /*!40000 ALTER TABLE `historial` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `informe`
@@ -186,15 +196,18 @@ CREATE TABLE `informe` (
   CONSTRAINT `informe_ibfk_1` FOREIGN KEY (`ID_DETALLES_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`),
   CONSTRAINT `informe_ibfk_2` FOREIGN KEY (`ID_ADMINISTRADOR`) REFERENCES `administradores` (`ID_ADMINISTRADOR`),
   CONSTRAINT `informe_ibfk_3` FOREIGN KEY (`ID_TECNICOS`) REFERENCES `tecnicos` (`ID_TECNICOS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `informe`
 --
 
+LOCK TABLES `informe` WRITE;
 /*!40000 ALTER TABLE `informe` DISABLE KEYS */;
+INSERT INTO `informe` VALUES (1,1,1,2,'Lista para entrega','2025-11-11 00:00:00','Pendiente'),(2,2,2,1,'Lista','2025-11-20 00:00:00','Entregado');
 /*!40000 ALTER TABLE `informe` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `motos`
@@ -220,9 +233,11 @@ CREATE TABLE `motos` (
 -- Dumping data for table `motos`
 --
 
+LOCK TABLES `motos` WRITE;
 /*!40000 ALTER TABLE `motos` DISABLE KEYS */;
 INSERT INTO `motos` VALUES (1,2,'MNS897','250','DUKE',400000.00),(2,3,'LOK654','390','DUKE',500000.00),(3,4,'BGT654','200','DUKE',700000.00);
 /*!40000 ALTER TABLE `motos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `orden_servicio`
@@ -250,15 +265,18 @@ CREATE TABLE `orden_servicio` (
   CONSTRAINT `orden_servicio_ibfk_2` FOREIGN KEY (`ID_ADMINISTRADOR`) REFERENCES `administradores` (`ID_ADMINISTRADOR`),
   CONSTRAINT `orden_servicio_ibfk_3` FOREIGN KEY (`ID_TECNICOS`) REFERENCES `tecnicos` (`ID_TECNICOS`),
   CONSTRAINT `orden_servicio_ibfk_4` FOREIGN KEY (`ID_MOTOS`) REFERENCES `motos` (`ID_MOTOS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `orden_servicio`
 --
 
+LOCK TABLES `orden_servicio` WRITE;
 /*!40000 ALTER TABLE `orden_servicio` DISABLE KEYS */;
+INSERT INTO `orden_servicio` VALUES (1,2,1,1,1,'2025-11-01 00:00:00','2025-11-03 00:00:00','2025-11-06 00:00:00','Pendiente'),(2,3,2,2,2,'2025-11-08 13:42:00','2025-11-12 15:20:00','2025-11-15 13:10:00','Pendiente'),(3,4,1,2,3,'2025-11-08 13:42:00','2025-11-12 15:20:00','2025-11-15 13:10:00','Pendiente');
 /*!40000 ALTER TABLE `orden_servicio` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `productos`
@@ -284,9 +302,11 @@ CREATE TABLE `productos` (
 -- Dumping data for table `productos`
 --
 
+LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
 INSERT INTO `productos` VALUES (1,'Lubricantes y Refrigerantes','Motorex','Aceite','30',120000.00,8,'Disponibles'),(2,'Accesorios Mecanicos','Rombo','Cadena','30',180000.00,5,'Disponibles'),(3,'Accesorios Electricos','Minda','Direccionales','10',150000.00,15,'Disponibles');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `servicios`
@@ -310,9 +330,11 @@ CREATE TABLE `servicios` (
 -- Dumping data for table `servicios`
 --
 
+LOCK TABLES `servicios` WRITE;
 /*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
 INSERT INTO `servicios` VALUES (1,'Mantenimineto preventivo','Mantenimientos','30','Disponible',6000000.00),(2,'Reparacion por daños','Reparaciones','-','Disponible',0.00),(3,'Instalaciones de accesorios','Instalaciones','14','Disponible',300000.00),(4,'Diagnosticos motor ','Diagnosticos','-','Disponible',600000.00);
 /*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tecnicos`
@@ -335,9 +357,11 @@ CREATE TABLE `tecnicos` (
 -- Dumping data for table `tecnicos`
 --
 
+LOCK TABLES `tecnicos` WRITE;
 /*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
 INSERT INTO `tecnicos` VALUES (1,'Camilo','Camiloxxx@gmail.com','52145698','315487962'),(2,'Alejandro','Alejandroxxx@gmail.com','5463215','311486562'),(3,'Santiago','Santiagoxxx@gmail.com','5471256','312425462');
 /*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ubicacion`
@@ -359,9 +383,11 @@ CREATE TABLE `ubicacion` (
 -- Dumping data for table `ubicacion`
 --
 
+LOCK TABLES `ubicacion` WRITE;
 /*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
 INSERT INTO `ubicacion` VALUES (1,'Cundinamarca','Soacha','Cra 40-55 sur'),(2,'Bogota','Suba','Cra 30-13 norte'),(3,'Cundinamarca','Sopo','Cra 80-20');
 /*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -372,4 +398,4 @@ INSERT INTO `ubicacion` VALUES (1,'Cundinamarca','Soacha','Cra 40-55 sur'),(2,'B
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-04 22:33:53
+-- Dump completed on 2025-11-05 13:52:57

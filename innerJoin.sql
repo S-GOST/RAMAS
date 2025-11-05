@@ -131,4 +131,10 @@ insert into tecnicos(Nombre,Correo,Contrasena,Telefono)values('Santiago','Santia
 insert into motos(ID_CLIENTES,Placa,Modelo,Marca,Recorrido)values('4','BGT654','200','DUKE','700000KM');
 insert into servicios(Nombre,Categoria,Garantia,Estado,Precio)values('Diagnosticos motor ','Diagnosticos','-','Disponible','600000');
 insert into productos(Categoria,Marca,Nombre,Garantia,Precio,Cantidad,Estado)values('Accesorios Electricos','Minda','Direccionales','10','150000','15','Disponibles');
-insert into orden_servicio(Nombre,Correo,Contrasena,Telefono)values('Santiago','Santiagoxxx@gmail.com','5471256','312425462');
+insert into orden_servicio(ID_CLIENTES,ID_ADMINISTRADOR,ID_TECNICOS,ID_MOTOS,Fecha_inicio,Fecha_estimada,Fecha_fin,Estado)values('4','1','2','3','2025-11-08 13:42:00','2025-11-12 15:20:00','2025-11-15 13:10:00','Pendiente');
+insert into detalles_orden_servicio(ID_ORDEN_SERVICIO,ID_SERVICIOS,ID_PRODUCTOS,Garantia,Estado,Precio)values('3','3','3','15','Finalizada','500000');
+insert into informe(ID_DETALLES_ORDEN_SERVICIO,ID_ADMINISTRADOR,ID_TECNICOS,Descripcion,Fecha,Estado)values('4','1','3','En espera por repuestos','2025-11-25','Lista para entrega');
+SHOW CREATE TABLE informe;
+
+
+
