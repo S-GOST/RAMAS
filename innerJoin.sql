@@ -104,3 +104,31 @@ join motos m ON o.ID_MOTOS = m.ID_MOTOS;
 select count(*) as OrdenesEntregadas
 from informe
 where Estado = 'Lista para entrega';
+
+
+
+/* datos insertados nuevanmente */
+
+select * from administradores;
+select * from ubicacion;
+select * from clientes;
+select * from tecnicos;
+select * from motos;
+select * from servicios;
+select * from productos;
+select * from orden_servicio;
+select * from detalles_orden_servicio;
+select * from informe;
+select * from comprobantes;
+select * from historial;
+
+/* Datos insertados */
+
+insert into administradores(Nombre,Correo,Contrasena,Telefono)values('Alejo','Alejopxxx@gmail.com','5469871','325586787');
+insert into ubicacion(Departamento,Ciudad,Direccion)values('Cundinamarca','Sopo','Cra 80-20');
+insert into clientes(ID_UBICACION,Nombre,Contrasena,Correo,Telefono)values('3','Bok','5463215','Terryxxx@gmail.com','300586787');
+insert into tecnicos(Nombre,Correo,Contrasena,Telefono)values('Santiago','Santiagoxxx@gmail.com','5471256','312425462');
+insert into motos(ID_CLIENTES,Placa,Modelo,Marca,Recorrido)values('4','BGT654','200','DUKE','700000KM');
+insert into servicios(Nombre,Categoria,Garantia,Estado,Precio)values('Diagnosticos motor ','Diagnosticos','-','Disponible','600000');
+insert into productos(Categoria,Marca,Nombre,Garantia,Precio,Cantidad,Estado)values('Accesorios Electricos','Minda','Direccionales','10','150000','15','Disponibles');
+insert into orden_servicio(Nombre,Correo,Contrasena,Telefono)values('Santiago','Santiagoxxx@gmail.com','5471256','312425462');
