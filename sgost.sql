@@ -1,5 +1,3 @@
-create database sgost;
-use sgost;
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sgost
@@ -96,7 +94,7 @@ CREATE TABLE `comprobante` (
   CONSTRAINT `comprobante_ibfk_1` FOREIGN KEY (`ID_INFORME`) REFERENCES `detalles_orden_servicio` (`ID_DETALLES_ORDEN_SERVICIO`),
   CONSTRAINT `comprobante_ibfk_2` FOREIGN KEY (`ID_CLIENTES`) REFERENCES `clientes` (`ID_CLIENTES`),
   CONSTRAINT `comprobante_ibfk_3` FOREIGN KEY (`ID_ADMINISTRADOR`) REFERENCES `administradores` (`ID_ADMINISTRADOR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -105,6 +103,7 @@ CREATE TABLE `comprobante` (
 
 LOCK TABLES `comprobante` WRITE;
 /*!40000 ALTER TABLE `comprobante` DISABLE KEYS */;
+INSERT INTO `comprobante` VALUES (1,1,2,1,3000000.00,'2025-11-05 00:00:00','Pagado'),(2,2,3,2,4000000.00,'2025-11-05 00:00:00','Por pagar'),(3,3,4,1,5000000.00,'2025-11-05 00:00:00','Pagado');
 /*!40000 ALTER TABLE `comprobante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -130,7 +129,7 @@ CREATE TABLE `detalles_orden_servicio` (
   CONSTRAINT `detalles_orden_servicio_ibfk_1` FOREIGN KEY (`ID_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`),
   CONSTRAINT `detalles_orden_servicio_ibfk_2` FOREIGN KEY (`ID_SERVICIOS`) REFERENCES `servicios` (`ID_SERVICIOS`),
   CONSTRAINT `detalles_orden_servicio_ibfk_3` FOREIGN KEY (`ID_PRODUCTOS`) REFERENCES `productos` (`ID_PRODUCTOS`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -139,7 +138,7 @@ CREATE TABLE `detalles_orden_servicio` (
 
 LOCK TABLES `detalles_orden_servicio` WRITE;
 /*!40000 ALTER TABLE `detalles_orden_servicio` DISABLE KEYS */;
-INSERT INTO `detalles_orden_servicio` VALUES (1,1,1,1,'30','En proceso',300000.00),(2,2,2,3,'10','En proceso',400000.00),(4,3,3,3,'15','Finalizada',500000.00);
+INSERT INTO `detalles_orden_servicio` VALUES (1,1,1,1,'30','En proceso',300000.00),(2,2,2,3,'10','En proceso',400000.00),(3,3,3,3,'15','Finalizada',500000.00);
 /*!40000 ALTER TABLE `detalles_orden_servicio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +163,7 @@ CREATE TABLE `historial` (
   KEY `ID_COMPROBANTE` (`ID_COMPROBANTE`),
   CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`ID_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`),
   CONSTRAINT `historial_ibfk_2` FOREIGN KEY (`ID_COMPROBANTE`) REFERENCES `comprobante` (`ID_COMPROBANTE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,6 +172,7 @@ CREATE TABLE `historial` (
 
 LOCK TABLES `historial` WRITE;
 /*!40000 ALTER TABLE `historial` DISABLE KEYS */;
+INSERT INTO `historial` VALUES (1,1,1,1,1,2,'Historial','2025-11-15 17:45:00'),(2,2,2,2,2,3,'Historial','2025-11-15 17:45:00'),(3,3,3,3,3,4,'Historial','2025-11-15 17:45:00');
 /*!40000 ALTER TABLE `historial` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +198,7 @@ CREATE TABLE `informe` (
   CONSTRAINT `informe_ibfk_1` FOREIGN KEY (`ID_DETALLES_ORDEN_SERVICIO`) REFERENCES `orden_servicio` (`ID_ORDEN_SERVICIO`),
   CONSTRAINT `informe_ibfk_2` FOREIGN KEY (`ID_ADMINISTRADOR`) REFERENCES `administradores` (`ID_ADMINISTRADOR`),
   CONSTRAINT `informe_ibfk_3` FOREIGN KEY (`ID_TECNICOS`) REFERENCES `tecnicos` (`ID_TECNICOS`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,7 +207,7 @@ CREATE TABLE `informe` (
 
 LOCK TABLES `informe` WRITE;
 /*!40000 ALTER TABLE `informe` DISABLE KEYS */;
-INSERT INTO `informe` VALUES (1,1,1,2,'Lista para entrega','2025-11-11 00:00:00','Pendiente'),(2,2,2,1,'Lista','2025-11-20 00:00:00','Entregado');
+INSERT INTO `informe` VALUES (1,1,1,2,'Lista para entrega','2025-11-11 00:00:00','Pendiente'),(2,2,2,1,'En espera','2025-11-20 00:00:00','Entregado'),(3,3,1,3,'En espera de repuestos','2025-11-25 00:00:00','Pendiente');
 /*!40000 ALTER TABLE `informe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -400,4 +400,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-05 13:52:57
+-- Dump completed on 2025-11-06 13:47:40

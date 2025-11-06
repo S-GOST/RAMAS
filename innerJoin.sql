@@ -116,7 +116,6 @@ select * from tecnicos;
 select * from motos;
 select * from servicios;
 select * from productos;
-select * from orden_servicio;
 select * from detalles_orden_servicio;
 select * from informe;
 select * from comprobante;
@@ -134,10 +133,11 @@ insert into productos(Categoria,Marca,Nombre,Garantia,Precio,Cantidad,Estado)val
 insert into orden_servicio(ID_CLIENTES,ID_ADMINISTRADOR,ID_TECNICOS,ID_MOTOS,Fecha_inicio,Fecha_estimada,Fecha_fin,Estado)values('4','1','2','3','2025-11-08 13:42:00','2025-11-12 15:20:00','2025-11-15 13:10:00','Pendiente');
 insert into detalles_orden_servicio(ID_ORDEN_SERVICIO,ID_SERVICIOS,ID_PRODUCTOS,Garantia,Estado,Precio)values('3','3','3','15','Finalizada','500000');
 insert into informe(ID_DETALLES_ORDEN_SERVICIO,ID_ADMINISTRADOR,ID_TECNICOS,Descripcion,Fecha,Estado)values('3','1','3','En espera de repuestos','2025-11-25','Pendiente');
-insert into comprobante(ID_INFORME,ID_CLIENTES,ID_ADMINISTRADOR,Monto,Fecha,Estado_pago)values('3','4','1','5000000','2025-11-15','Pagado');
+insert into comprobante(ID_INFORME,ID_CLIENTES,ID_ADMINISTRADOR,Monto,Fecha,Estado_pago)values('3','4','1','5000000','2025-11-05','Pagado');
 insert into historial(ID_ORDEN_SERVICIO,ID_COMPROBANTE,ID_INFORME,ID_TECNICOS,ID_CLIENTES,Descripcion,Fecha_registro)values('3','3','3','3','4','Historial','2025-11-15 17:45:00');
-
-
+update informe 
+set ID_INFORME = 3
+where ID_INFORME = 10
 
 
 
