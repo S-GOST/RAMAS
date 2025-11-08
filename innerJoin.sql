@@ -1,14 +1,14 @@
 use sgost;
 /* Todas las ordenes a cargo */
-SELECT o.ID_ORDEN_SERVICIO, a.Nombre AS Administradores, t.Nombre AS Tecnicos, c.Nombre AS Clientes, o.Estado
+SELECT o.ID_ORDEN_SERVICIO, c.Nombre AS Clientes, t.Nombre AS Tecnicos, a.Nombre AS Administradores, o.Estado
 FROM orden_servicio o
 JOIN clientes c ON o.ID_CLIENTES = c.ID_CLIENTES
 JOIN tecnicos t ON o.ID_TECNICOS = t.ID_TECNICOS
 JOIN administradores a ON o.ID_ADMINISTRADOR = a.ID_ADMINISTRADOR;
 
 update clientes
-set ID_UBICACION = 1
-where ID_CLIENTES = 1;
+set Telefono = 3002507132
+where ID_CLIENTES = 6;
 select * from clientes;
 insert into ubicacion(ID_UBICACION,Departamento,Ciudad,Direccion) values ('3','Cundinamarca','El carmen','80');
 select * from ubicacion;
@@ -117,6 +117,7 @@ select * from motos;
 select * from servicios;
 select * from productos;
 select * from detalles_orden_servicio;
+select * from orden_servicio;
 select * from informe;
 select * from comprobante;
 select * from historial;
@@ -135,9 +136,9 @@ insert into detalles_orden_servicio(ID_ORDEN_SERVICIO,ID_SERVICIOS,ID_PRODUCTOS,
 insert into informe(ID_DETALLES_ORDEN_SERVICIO,ID_ADMINISTRADOR,ID_TECNICOS,Descripcion,Fecha,Estado)values('3','1','3','En espera de repuestos','2025-11-25','Pendiente');
 insert into comprobante(ID_INFORME,ID_CLIENTES,ID_ADMINISTRADOR,Monto,Fecha,Estado_pago)values('3','4','1','5000000','2025-11-05','Pagado');
 insert into historial(ID_ORDEN_SERVICIO,ID_COMPROBANTE,ID_INFORME,ID_TECNICOS,ID_CLIENTES,Descripcion,Fecha_registro)values('3','3','3','3','4','Historial','2025-11-15 17:45:00');
-update informe 
-set ID_INFORME = 3
-where ID_INFORME = 10
+update clientes 
+set TipoDocumento = 'Cedula Ciudadania'
+where ID_CLIENTES = 4
 
 
 
