@@ -1,22 +1,13 @@
 use sgost;
+
 /* Todas las ordenes a cargo */
+
 SELECT o.ID_ORDEN_SERVICIO, c.Nombre AS Clientes, t.Nombre AS Tecnicos, a.Nombre AS Administradores, o.Estado
 FROM orden_servicio o
 JOIN clientes c ON o.ID_CLIENTES = c.ID_CLIENTES
 JOIN tecnicos t ON o.ID_TECNICOS = t.ID_TECNICOS
 JOIN administradores a ON o.ID_ADMINISTRADOR = a.ID_ADMINISTRADOR;
 
-update clientes
-set Telefono = 3002507132
-where ID_CLIENTES = 6;
-select * from clientes;
-insert into ubicacion(ID_UBICACION,Departamento,Ciudad,Direccion) values ('3','Cundinamarca','El carmen','80');
-select * from ubicacion;
-select * from detalles_orden_servicio;
-select * from orden_servicio;
-select * from detalles_orden_servicio;
-select * from informe;
-select * from comprobante;
 /* Clientes con su ubicacion */
 
 select c.Nombre, u.Ciudad, u.Direccion
@@ -104,8 +95,6 @@ join motos m ON o.ID_MOTOS = m.ID_MOTOS;
 select count(*) as OrdenesEntregadas
 from informe
 where Estado = 'Lista para entrega';
-
-
 
 /* datos insertados nuevanmente */
 
