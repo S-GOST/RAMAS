@@ -45,6 +45,33 @@ INSERT INTO `administradores` VALUES (1,'JuanP','Juanpxxx@gmail.com','5698745','
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tecnicos`
+--
+
+DROP TABLE IF EXISTS `tecnicos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tecnicos` (
+  `ID_TECNICOS` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  `TipoDocumento` varchar(100) NOT NULL,
+  `Correo` varchar(100) NOT NULL,
+  `Telefono` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID_TECNICOS`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tecnicos`
+--
+
+LOCK TABLES `tecnicos` WRITE;
+/*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
+INSERT INTO `tecnicos` VALUES (1,'Camilo','52145698','Camiloxxx@gmail.com','315487962'),(2,'Alejandro','5463215','Alejandroxxx@gmail.com','311486562'),(3,'Santiago','5471256','Santiagoxxx@gmail.com','312425462');
+/*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `clientes`
 --
 
@@ -340,32 +367,7 @@ INSERT INTO `servicios` VALUES (1,'Mantenimineto preventivo','Mantenimientos','3
 /*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `tecnicos`
---
 
-DROP TABLE IF EXISTS `tecnicos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tecnicos` (
-  `ID_TECNICOS` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(100) NOT NULL,
-  `TipoDocumento` varchar(100) NOT NULL,
-  `Correo` varchar(100) NOT NULL,
-  `Telefono` varchar(20) NOT NULL,
-  PRIMARY KEY (`ID_TECNICOS`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tecnicos`
---
-
-LOCK TABLES `tecnicos` WRITE;
-/*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
-INSERT INTO `tecnicos` VALUES (1,'Camilo','52145698','Camiloxxx@gmail.com','315487962'),(2,'Alejandro','5463215','Alejandroxxx@gmail.com','311486562'),(3,'Santiago','5471256','Santiagoxxx@gmail.com','312425462');
-/*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `ubicacion`
