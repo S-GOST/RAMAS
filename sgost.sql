@@ -1,5 +1,3 @@
-create database sgost;
-use sgost;
 -- MySQL dump 10.13  Distrib 8.0.43, for Win64 (x86_64)
 --
 -- Host: localhost    Database: sgost
@@ -45,33 +43,6 @@ INSERT INTO `administradores` VALUES (1,'JuanP','Juanpxxx@gmail.com','5698745','
 UNLOCK TABLES;
 
 --
--- Table structure for table `tecnicos`
---
-
-DROP TABLE IF EXISTS `tecnicos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tecnicos` (
-  `ID_TECNICOS` int(11) NOT NULL AUTO_INCREMENT,
-  `Nombre` varchar(100) NOT NULL,
-  `TipoDocumento` varchar(100) NOT NULL,
-  `Correo` varchar(100) NOT NULL,
-  `Telefono` varchar(20) NOT NULL,
-  PRIMARY KEY (`ID_TECNICOS`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tecnicos`
---
-
-LOCK TABLES `tecnicos` WRITE;
-/*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
-INSERT INTO `tecnicos` VALUES (1,'Camilo','52145698','Camiloxxx@gmail.com','315487962'),(2,'Alejandro','5463215','Alejandroxxx@gmail.com','311486562'),(3,'Santiago','5471256','Santiagoxxx@gmail.com','312425462');
-/*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `clientes`
 --
 
@@ -80,15 +51,13 @@ DROP TABLE IF EXISTS `clientes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `clientes` (
   `ID_CLIENTES` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_UBICACION` int(11) DEFAULT NULL,
+  `Ubicacion` varchar(40) DEFAULT NULL,
   `Nombre` varchar(100) NOT NULL,
   `TipoDocumento` varchar(45) NOT NULL,
   `Correo` varchar(100) NOT NULL,
   `Telefono` varchar(20) NOT NULL,
-  PRIMARY KEY (`ID_CLIENTES`),
-  KEY `ID_UBICACION` (`ID_UBICACION`),
-  CONSTRAINT `clientes_ibfk_1` FOREIGN KEY (`ID_UBICACION`) REFERENCES `ubicacion` (`ID_UBICACION`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  PRIMARY KEY (`ID_CLIENTES`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -97,7 +66,7 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (2,1,'Teodoro','Tarjeta de Identidad','Teodoroxxx@gmail.com','3112036543'),(3,2,'Bok','Cedula de Ciudadania','Bokxxx@gmail.com','3002548798'),(4,2,'Camila','Pasaporte','Camilaxxx@gmail.com','3102456987');
+INSERT INTO `clientes` VALUES (1,'Cundinamarca','Bok','Cedula de ciudadania','Terryxxx@gmail.com','300586787'),(2,'Bogota','Rosa','Cedula de Ciudadania','Rosaxxx@gmail.com','311202547'),(3,'Cundinamarca','Teodoro','Pasaporte','Teodoroxxx@gmail.com','311256478'),(4,'Bogota','Terry','Cedula de Ciudadania','Terryxxx@gmail.com','311785141');
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +101,6 @@ CREATE TABLE `comprobante` (
 
 LOCK TABLES `comprobante` WRITE;
 /*!40000 ALTER TABLE `comprobante` DISABLE KEYS */;
-INSERT INTO `comprobante` VALUES (1,1,2,1,'3000000','2025-11-05 00:00:00','Pagado'),(2,2,3,2,'4000000','2025-11-05 00:00:00','Pagado'),(3,3,4,1,'5000000','2025-11-05 00:00:00','Pagado');
 /*!40000 ALTER TABLE `comprobante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -367,32 +335,31 @@ INSERT INTO `servicios` VALUES (1,'Mantenimineto preventivo','Mantenimientos','3
 /*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
 UNLOCK TABLES;
 
-
-
 --
--- Table structure for table `ubicacion`
+-- Table structure for table `tecnicos`
 --
 
-DROP TABLE IF EXISTS `ubicacion`;
+DROP TABLE IF EXISTS `tecnicos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ubicacion` (
-  `ID_UBICACION` int(11) NOT NULL AUTO_INCREMENT,
-  `Departamento` varchar(100) NOT NULL,
-  `Ciudad` varchar(100) NOT NULL,
-  `Direccion` varchar(100) NOT NULL,
-  PRIMARY KEY (`ID_UBICACION`)
+CREATE TABLE `tecnicos` (
+  `ID_TECNICOS` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) NOT NULL,
+  `TipoDocumento` varchar(100) NOT NULL,
+  `Correo` varchar(100) NOT NULL,
+  `Telefono` varchar(20) NOT NULL,
+  PRIMARY KEY (`ID_TECNICOS`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ubicacion`
+-- Dumping data for table `tecnicos`
 --
 
-LOCK TABLES `ubicacion` WRITE;
-/*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
-INSERT INTO `ubicacion` VALUES (1,'Cundinamarca','Soacha','Cra 40-55 sur'),(2,'Bogota','Suba','Cra 30-13 norte'),(3,'Cundinamarca','Sopo','Cra 80-20');
-/*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
+LOCK TABLES `tecnicos` WRITE;
+/*!40000 ALTER TABLE `tecnicos` DISABLE KEYS */;
+INSERT INTO `tecnicos` VALUES (1,'Camilo','52145698','Camiloxxx@gmail.com','315487962'),(2,'Alejandro','5463215','Alejandroxxx@gmail.com','311486562'),(3,'Santiago','5471256','Santiagoxxx@gmail.com','312425462');
+/*!40000 ALTER TABLE `tecnicos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -404,4 +371,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-11-12 11:06:16
+-- Dump completed on 2025-11-14 13:47:08
